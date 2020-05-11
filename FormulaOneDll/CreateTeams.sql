@@ -1,14 +1,16 @@
 CREATE TABLE [dbo].[Teams]
 (
-	[id] INT NOT NULL PRIMARY KEY IDENTITY,
-    [name] VARCHAR(128) NOT NULL,
-    [fullTeamName] VARCHAR(128) NOT NULL, 
-    [extCountry] CHAR(2) NOT NULL, 
-    [powerUnit] VARCHAR(128) NOT NULL, 
-    [technicalChief] VARCHAR(128) NOT NULL,
-	[chassis] VARCHAR(128) NOT NULL,
-	[extFirstDriver] INT NOT NULL,
-	[extSecondDriver] INT NOT NULL
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[logo] [varchar](200) NOT NULL,
+	[name] [varchar](128) NOT NULL,
+	[fullTeamName] [varchar](128) NOT NULL,
+	[extCountry] [char](2) NOT NULL,
+	[powerUnit] [varchar](128) NOT NULL,
+	[technicalChief] [varchar](128) NOT NULL,
+	[chassis] [varchar](128) NOT NULL,
+	[extFirstDriver] [int] NOT NULL,
+	[extSecondDriver] [int] NOT NULL,
+	PRIMARY KEY CLUSTERED ([id] ASC)
 );
 
 SET IDENTITY_INSERT [dbo].[Teams] ON;
@@ -16,6 +18,7 @@ SET IDENTITY_INSERT [dbo].[Teams] ON;
 INSERT INTO [dbo].[Teams]
 (
 	id,
+	logo,
 	name,
 	fullTeamName,
 	extCountry,
@@ -26,13 +29,13 @@ INSERT INTO [dbo].[Teams]
 	extSecondDriver
 )
 VALUES
-(1,'Alfa Romeo', 'Alfa Romeo Racing', 'CH', 'Ferrari', 'Jan Monchaux', 'C38', 20, 10),
-(2,'Ferrari', 'Scuderia Ferrari Mission Winnow', 'IT', 'Ferrari', 'Mattia Binotto', 'SF90',20,10),
-(3,'Red Bull', 'Aston Martin Red Bull Racing', 'GB', 'Honda', 'Pierre Waché', 'RB15',20,10),
-(4,'Haas', 'Haas F1 Team', 'US', 'Ferrari', 'Rob Taylor', 'VF-19', 20, 10),
-(5,'McLaren', 'McLaren F1 Team', 'GB', 'Renault', 'James Key', 'MCL34', 20, 10),
-(6,'Mercedes', 'Mercedes AMG Petronas Motorsport', 'GB', 'Mercedes', 'James Allison', 'W10',20,10),
-(7,'Toro Rosso', 'Red Bull Toro Rosso Honda', 'IT', 'Honda', 'Jody Eggington', 'STR14', 20, 10),
-(8,'Racing Point', 'SportPesa Racing Point F1 Team', 'GB', 'BWT Mercedes', 'Andrew Green', 'RP19', 20, 10),
-(9,'Williams', 'ROKiT Williams Racing', 'GB', 'Mercedes', 'TBC', 'FW42', 20, 10),
-(10,'Renault', 'Renault F1 Team', 'GB', 'Renault', 'Nick Chester', 'R.S.19',20,10);
+(1, 'https://upload.wikimedia.org/wikipedia/it/thumb/c/c7/Alfa_Romeo_2015.svg/1200px-Alfa_Romeo_2015.svg.png', 'Alfa Romeo', 'Alfa Romeo Racing', 'CH', 'Ferrari', 'Jan Monchaux', 'C38', 14, 16),
+(2, 'https://upload.wikimedia.org/wikipedia/it/thumb/5/59/Logo_della_Scuderia_Ferrari_%28vecchio%29.svg/1200px-Logo_della_Scuderia_Ferrari_%28vecchio%29.svg.png', 'Ferrari', 'Scuderia Ferrari Mission Winnow', 'IT', 'Ferrari', 'Mattia Binotto', 'SF90', 3, 5),
+(3, 'https://lh3.googleusercontent.com/proxy/gYRocGOxdSDYQGbn-fXo2oKUX5dsk7fWagR9Cg2Smuox2-WbSm4PjeVGJsPLQH7eC4LoWzqmAsVDtxB69iKHCFu_bvqWW77Zu5BgzgFHEW0xu4-sAFB-Nmpgjb8', 'Red Bull', 'Aston Martin Red Bull Racing', 'GB', 'Honda', 'Pierre Waché', 'RB15', 4, 7),
+(4, 'https://www.nicepng.com/png/detail/609-6091929_logo-haas-f1-haas-f1-logo.png', 'Haas', 'Haas F1 Team', 'US', 'Ferrari', 'Rob Taylor', 'VF-19', 18, 17),
+(5, 'https://formularapida.net/wp-content/uploads/2019/01/DxG7bOQXgAEul7l.jpg', 'McLaren', 'McLaren F1 Team', 'GB', 'Renault', 'James Key', 'MCL34', 10, 9),
+(6, 'https://f0.pngfuel.com/png/352/130/mercedes-benz-logo-mercedes-benz-car-motor-vehicle-service-luxury-vehicle-mercedes-logo-png-clip-art.png', 'Mercedes', 'Mercedes AMG Petronas Motorsport', 'GB', 'Mercedes', 'James Allison', 'W10', 1, 2),
+(7, 'https://www.searchpng.com/wp-content/uploads/2019/08/Scuderia-Toro-Rosso-Logo-PNG-Image-715x715.jpg', 'Toro Rosso', 'Red Bull Toro Rosso Honda', 'IT', 'Honda', 'Jody Eggington', 'STR14', 8, 20),
+(8, 'https://pbs.twimg.com/profile_images/1097917015312998401/XVGUMWCl.png', 'Racing Point', 'SportPesa Racing Point F1 Team', 'GB', 'BWT Mercedes', 'Andrew Green', 'RP19', 12, 15),
+(9, 'https://www.pinclipart.com/picdir/middle/2-26232_williams-f1-logo-clipart-williams-martini-racing-racing.png', 'Williams', 'ROKiT Williams Racing', 'GB', 'Mercedes', 'TBC', 'FW42', 19, 13),
+(10, 'https://iezzimotors.it/wp-content/uploads/2018/06/Renault-logo-2015-2048x2048.png', 'Renault', 'Renault F1 Team', 'GB', 'Renault', 'Nick Chester', 'R.S.19', 6, 11);

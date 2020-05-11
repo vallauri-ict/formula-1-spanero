@@ -109,6 +109,7 @@ namespace FormulaOneBacthConsoleProject
             else
                 Console.WriteLine("Uncorrect choice.");
         }
+
         /*private static void RestoreDB()
         {
             db.Restore();
