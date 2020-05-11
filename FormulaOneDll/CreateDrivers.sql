@@ -10,16 +10,17 @@ CREATE TABLE [dbo].[Drivers]
 	[extCountry] [char](2) NOT NULL,
 	PRIMARY KEY CLUSTERED ([id] ASC)
 );
-
 SET IDENTITY_INSERT [dbo].[Drivers] ON;
 
 INSERT INTO [dbo].[Drivers]
 (
-	id,
+    	id,
+	number,
 	firstName,
 	lastName,
 	dob,
 	placeOfBirth,
+	image,
 	extCountry
 )
 VALUES

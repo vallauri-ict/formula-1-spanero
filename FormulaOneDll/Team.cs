@@ -10,6 +10,7 @@ namespace FormulaOneDll
     {
         #region Attributes
         private int id;
+        private string logo;
         private string name;
         private string fullTeamName;
         private Country country;
@@ -23,9 +24,10 @@ namespace FormulaOneDll
         #region Constructors
         public Team () { }
 
-        public Team(int id, string nome, string fullTeamName, Country country, string powerUnit, string technicalChief, string chassis, Driver firstDriver, Driver secondDriver)
+        public Team(int id, string logo,string nome, string fullTeamName, Country country, string powerUnit, string technicalChief, string chassis, Driver firstDriver, Driver secondDriver)
         {
             this.ID = id;
+            this.Logo = logo;
             this.Name = nome;
             this.FullTeamName = fullTeamName;
             this.Country = country;
@@ -47,6 +49,7 @@ namespace FormulaOneDll
         public string Chassis { get => chassis; set => chassis = value; }
         public Driver FirstDriver { get => firstDriver; set => firstDriver = value; }
         public Driver SecondDriver { get => secondDriver; set => secondDriver = value; }
+        public string Logo { get => logo; set => logo = value; }
         #endregion
 
         #region Methods

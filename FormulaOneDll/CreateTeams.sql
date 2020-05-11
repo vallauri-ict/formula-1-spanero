@@ -12,7 +12,6 @@ CREATE TABLE [dbo].[Teams]
 	[extSecondDriver] [int] NOT NULL,
 	PRIMARY KEY CLUSTERED ([id] ASC)
 );
-
 SET IDENTITY_INSERT [dbo].[Teams] ON;
 
 INSERT INTO [dbo].[Teams]

@@ -190,11 +190,13 @@ namespace FormulaOneDll
                         int driverIsoCode = reader.GetInt32(0);
                         Driver d = new Driver(driverIsoCode)
                         {
-                            Firstname = reader.GetString(1),
-                            Lastname = reader.GetString(2),
-                            Dob = reader.GetDateTime(3),
-                            PlaceOfBirthday = reader.GetString(4),
-                            Country = Countries[reader.GetString(5)]
+                            Number = reader.GetInt32(1),
+                            Firstname = reader.GetString(2),
+                            Lastname = reader.GetString(3),
+                            Dob = reader.GetDateTime(4),
+                            PlaceOfBirthday = reader.GetString(5),
+                            Image = reader.GetString(6),
+                            Country = Countries[reader.GetString(7)]
                         };
                         this.Drivers.Add(driverIsoCode, d);
                     }
@@ -221,14 +223,15 @@ namespace FormulaOneDll
                     Team t = new Team()
                     {
                         ID = reader.GetInt32(0),
-                        Name = reader.GetString(1),
-                        FullTeamName = reader.GetString(2),
-                        Country = this.Countries[reader.GetString(3)],
-                        PowerUnit = reader.GetString(4),
-                        TechnicalChief = reader.GetString(5),
-                        Chassis = reader.GetString(6),
-                        FirstDriver = this.Drivers[reader.GetInt32(7)],
-                        SecondDriver = this.Drivers[reader.GetInt32(8)]
+                        Logo = reader.GetString(1),
+                        Name = reader.GetString(2),
+                        FullTeamName = reader.GetString(3),
+                        Country = this.Countries[reader.GetString(4)],
+                        PowerUnit = reader.GetString(5),
+                        TechnicalChief = reader.GetString(6),
+                        Chassis = reader.GetString(7),
+                        FirstDriver = this.Drivers[reader.GetInt32(8)],
+                        SecondDriver = this.Drivers[reader.GetInt32(9)]
                     };
                     teams.Add(t);
                 }
