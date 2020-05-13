@@ -23,6 +23,8 @@ namespace FormulaOneDll
 
         private Dictionary<int, Driver> drivers;
         private Dictionary<string, Country> countries;
+        private Dictionary<int, Circuits> circuits;
+        private Dictionary<int, Race> races;
         private List<Team> teams;
 
         public Dictionary<int, Driver> Drivers
@@ -44,6 +46,26 @@ namespace FormulaOneDll
                 return this.countries;
             }
             set => countries = value;
+        }
+        public Dictionary<int, Circuits> Circuits
+        {
+            get
+            {
+                if (this.circuits == null)
+                    this.GetCircuits();
+                return this.circuits;
+            }
+            set => circuits = value;
+        }
+        public Dictionary<int, Race> Races
+        {
+            get
+            {
+                if (this.races == null)
+                    this.GetRaces();
+                return this.races;
+            }
+            set => races = value;
         }
         public List<Team> Teams
         {
@@ -171,6 +193,68 @@ namespace FormulaOneDll
             }
         }
 
+        public void GetCircuits()
+        {
+            if (this.circuits == null)
+            {
+                this.circuits = new Dictionary<int, Circuits>();
+                var con = new SqlConnection(CONNECTION_STRING);
+                using (con)
+                {
+                    con.Open();
+                    var command = new SqlCommand("SELECT * FROM Circuits;", con);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int circuitsId = reader.GetInt32(0);                       
+                        Circuits c = new Circuits(circuitsId)
+                        {
+                            Name = reader.GetString(1),
+                            City = reader.GetString(2),
+                            Length = reader.GetInt32(3),
+                            RecordLap = reader.GetString(4),
+                            Img = reader.GetString(5),
+                            FirstGrandPrix = reader.GetInt32(6)
+                        };
+                        this.circuits.Add(circuitsId, c);
+                    }
+                    con.Close();
+                    con.Dispose();
+                }
+                SqlConnection.ClearAllPools();
+            }
+        }
+
+        public void GetRaces()
+        {
+            if (this.races == null)
+            {
+                this.races = new Dictionary<int, Race>();
+                var con = new SqlConnection(CONNECTION_STRING);
+                using (con)
+                {
+                    con.Open();
+                    var command = new SqlCommand("SELECT * FROM Races;", con);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int raceId = reader.GetInt32(0);
+                        Race c = new Race(raceId)
+                        {
+                            GpName = reader.GetString(1),
+                            Circuit = Circuits[reader.GetInt32(2)].Name,
+                            NLaps = reader.GetInt32(3),
+                            GpDate = reader.GetDateTime(4),
+                            ExtCountry = Countries[reader.GetString(5)].CountryName 
+                        };
+                        this.races.Add(raceId, c);
+                    }
+                    con.Close();
+                    con.Dispose();
+                }
+                SqlConnection.ClearAllPools();
+            }
+        }
 
         public void GetDrivers(bool forceReload = false)
         {

@@ -8,13 +8,13 @@ using System.Web.Http;
 
 namespace FormulaOneWebApi.Controllers
 {
-    public class CountriesController : ApiController
+    public class CircuitsController : ApiController
     {
         DbTools db = new DbTools();
 
-        public IEnumerable<Country> GetAllCountries()
+        public IEnumerable<Circuits> GetAllCircuits()
         {
-            return db.Countries.Values;
+            return db.Circuits.Values;
         }
 
         public IHttpActionResult GetCountry(int id)

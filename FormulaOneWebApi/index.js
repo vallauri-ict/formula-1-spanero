@@ -8,7 +8,9 @@ $(function () {
         data: {
             teams: [],
             drivers: [],
-            countries: []
+            countries: [],
+            circuits: [],
+            races: []
         }
     });
 });
@@ -18,6 +20,8 @@ function loadDrivers() {
         app.teams = [];
         app.countries = [];
         app.drivers = data;
+        app.circuits = [];
+        app.races = [];
     });
 }
 
@@ -26,6 +30,8 @@ function loadTeams() {
         app.teams = data;
         app.countries = [];
         app.drivers = [];
+        app.circuits = [];
+        app.races = [];
     });
 }
 
@@ -34,7 +40,30 @@ function loadCountries() {
         app.teams = [];
         app.countries = data;
         app.drivers = [];
+        app.circuits = [];
+        app.races = [];
     });
+}
+
+function loadCircuits() {
+    sendRequest("/Circuits", "get", data => {
+        app.teams = [];
+        app.countries = [];
+        app.drivers = [];
+        app.circuits = data;
+        app.races = [];
+    });
+}
+
+function loadRaces() {
+    sendRequest("/Races", "get", data => {
+        app.teams = [];
+        app.countries = [];
+        app.drivers = [];
+        app.circuits = [];
+        app.races = data;
+    });
+    
 }
 
 function sendRequest(parameters, method, callback) {

@@ -16,8 +16,8 @@
 <body>
     <div id="wrapper" class="container-fluid">
         <div class="row">
-            <div class="col-sm-3 mx-auto">
-                <h2>Formula One Web Api</h2>
+            <div class="col-sm-5 mx-auto">
+                <h2>Formula One Web Api - Simone Panero</h2>
             </div>
         </div>
         <div id="app" class="row">
@@ -26,6 +26,9 @@
                 <input type="button" value="Teams" onclick="loadTeams();" class="btn btn-primary" />
                 <input type="button" value="Countries" onclick="loadCountries();" class="btn btn-success" />
                 <input type="button" value="Drivers" onclick="loadDrivers();" class="btn btn-warning" style="color:white" />
+                <input type="button" value="Circuits" onclick="loadCircuits();" class="btn btn-danger" style="color:white" />
+                <input type="button" value="Races" onclick="loadRaces();" class="btn btn-info" style="color:white" />
+
                 <table v-if="teams.length > 0" id="teamsTable" class="table">
                     <thead>
                         <tr>
@@ -44,7 +47,7 @@
                     <tbody>
                         <tr v-for="(item, index) in teams">
                             <td>{{item.ID}}</td>
-                            <td><img v-bind:src="item.Logo" style="height:50px; width:50px;"/></td>
+                            <td><img v-bind:src="item.Logo" style="height:50px; width:50px;" /></td>
                             <td>{{item.Name}}</td>
                             <td>{{item.FullTeamName}}</td>
                             <td>{{item.Country.CountryName}}</td>
@@ -85,7 +88,7 @@
                 <table class="table is-fullwidth is-hoverable table" v-if="countries.length > 0" id="countryTable">
                     <thead>
                         <tr>
-                            <th>Cod</th>
+                            <th>Code</th>
                             <th>Name</th>
                             <th>Flag</th>
                         </tr>
@@ -95,6 +98,53 @@
                             <td>{{item.CountryCode}}</td>
                             <td>{{item.CountryName}}</td>
                             <td><img v-bind:src="item.Flag" style="height:60px; width:120px; background-repeat: no-repeat;  background-attachment: fixed;  background-position: center;" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table is-fullwidth is-hoverable table" v-if="circuits.length > 0" id="circuitsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>City</th>
+                            <th>Length</th>
+                            <th>Record Lap</th>
+                            <th>Image</th>
+                            <th>First GP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in circuits">
+                            <td>{{item.Id}}</td>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.City}}</td>
+                            <td>{{item.Length}}</td>
+                            <td>{{item.RecordLap}}</td>
+                            <td><img v-bind:src="item.Img" style="height:60px; width:120px; background-repeat: no-repeat;  background-attachment: fixed;  background-position: center;" /></td>
+                            <td>{{item.FirstGrandPrix}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table is-fullwidth is-hoverable table" v-if="races.length > 0" id="racesTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Grand Prix Name</th>
+                            <th>Circuit</th>
+                            <th>Laps</th>
+                            <th>Grand Prix Date</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in races">
+                            <td>{{item.Id}}</td>
+                            <td>{{item.GpName}}</td>
+                            <td>{{item.Circuit}}</td>
+                            <td>{{item.NLaps}}</td>
+                            <td>{{item.GpDate}}</td>
+                            <td>{{item.ExtCountry}}</td>
                         </tr>
                     </tbody>
                 </table>

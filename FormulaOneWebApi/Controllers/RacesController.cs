@@ -8,16 +8,16 @@ using System.Web.Http;
 
 namespace FormulaOneWebApi.Controllers
 {
-    public class CountriesController : ApiController
+    public class RacesController : ApiController
     {
         DbTools db = new DbTools();
 
-        public IEnumerable<Country> GetAllCountries()
+        public IEnumerable<Race> GetAllRaces()
         {
-            return db.Countries.Values;
+            return db.Races.Values;
         }
 
-        public IHttpActionResult GetCountry(int id)
+        public IHttpActionResult GetRace(int id)
         {
             return NotFound();
         }
