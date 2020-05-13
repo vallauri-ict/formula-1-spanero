@@ -103,27 +103,6 @@ namespace FormulaOneDll
             set => teams = value;
         }
 
-        //public void CreateCountriesWithSmo()
-        //{
-        //    string sqlConnectionString = @"Data Source = (localdb)\MSSQLLocalDB; 
-        //        AttachDbFilename =C:\Users\loren\OneDrive\Desktop\_Scuola\2019-2020\INFORMATICA\CAMBIERI\FormulaOneSolution\FormulaOne.mdf; Integrated Security = True";
-        //    FileInfo file = new FileInfo(@"Countries.sql");
-        //    string script = file.OpenText().ReadToEnd();
-        //    SqlConnection conn = new SqlConnection(sqlConnectionString);
-        //    Server server = new Server(new ServerConnection(conn));
-
-        //    try
-        //    {
-        //        server.ConnectionContext.ExecuteNonQuery(script);
-        //        file.OpenText().Close();
-        //        conn.Close();
-        //        Console.WriteLine("CreateCountries: SUCCESS");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Error: " + ex);
-        //    }
-        //}
 
         public void ExecuteSqlScript(string sqlScriptPath)
         {
