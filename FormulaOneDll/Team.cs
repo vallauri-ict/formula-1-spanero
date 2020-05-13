@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FormulaOneDll
 {
+    [DataContract]
     public class Team
     {
         #region Attributes
@@ -22,9 +24,9 @@ namespace FormulaOneDll
         #endregion
 
         #region Constructors
-        public Team () { }
+        public Team() { }
 
-        public Team(int id, string logo,string nome, string fullTeamName, Country country, string powerUnit, string technicalChief, string chassis, Driver firstDriver, Driver secondDriver)
+        public Team(int id, string logo, string nome, string fullTeamName, Country country, string powerUnit, string technicalChief, string chassis, Driver firstDriver, Driver secondDriver)
         {
             this.ID = id;
             this.Logo = logo;
@@ -40,15 +42,25 @@ namespace FormulaOneDll
         #endregion
 
         #region Properties
+        [DataMember]
         public int ID { get => id; set => id = value; }
+        [DataMember]
         public string Name { get => name; set => name = value; }
+        [DataMember]
         public string FullTeamName { get => fullTeamName; set => fullTeamName = value; }
+        
         public Country Country { get => country; set => country = value; }
+        [DataMember]
         public string PowerUnit { get => powerUnit; set => powerUnit = value; }
+        [DataMember]
         public string TechnicalChief { get => technicalChief; set => technicalChief = value; }
+        [DataMember]
         public string Chassis { get => chassis; set => chassis = value; }
+       
         public Driver FirstDriver { get => firstDriver; set => firstDriver = value; }
+        
         public Driver SecondDriver { get => secondDriver; set => secondDriver = value; }
+        [DataMember]
         public string Logo { get => logo; set => logo = value; }
         #endregion
 

@@ -10,60 +10,150 @@ $(function () {
             drivers: [],
             countries: [],
             circuits: [],
-            races: []
+            races: [],
+            racesScores: []
         }
     });
 });
 
+function singleCircuit() {
+    sendRequest("/circuits/" + $('#txtCircuit').val(), "get", data => {
+
+        app.teams = [];
+        app.countries = [];
+        app.drivers = [];
+        //[data] crea un vettore di una pos per far partire il "trigger" della tabella 
+        app.circuits = [data];
+        app.races = [];
+        app.racesScores = [];
+        console.log(data);
+        console.log(app.circuits);
+    });
+}
+
+function singleTeam() {
+    sendRequest("/teams/" + $('#txtTeam').val(), "get", data => {
+        app.teams = [data];
+        app.countries = [];
+        app.drivers = [];
+        app.circuits = [];
+        app.races = [];
+        app.racesScores = [];
+    });
+}
+
+function singleDriver() {
+    sendRequest("/drivers/" + $('#txtDriver').val(), "get", data => {
+        app.teams = [];
+        app.countries = [];
+        app.drivers = [data]; 
+        app.circuits = [];
+        app.races = [];
+        app.racesScores = [];
+    });
+}
+
+function singleCountry() {
+    sendRequest("/countries/" + $('#txtCountry').val(), "get", data => {
+        app.teams = [];
+        app.countries = [data];
+        app.drivers = [];
+        app.circuits = [];
+        app.races = [];
+        app.racesScores = [];
+    });
+}
+
+function singleRace() {
+    sendRequest("/races/" + $('#txtRace').val(), "get", data => {
+
+        app.teams = [];
+        app.countries = [];
+        app.drivers = [];       
+        app.circuits = [];
+        app.races = [data];
+        app.racesScores = [];
+    });
+}
+
+function singleRaceScore() {
+    sendRequest("/racesScores/" + $('#txtRaceScore').val(), "get", data => {
+
+        app.teams = [];
+        app.countries = [];
+        app.drivers = [];
+        app.circuits = [];
+        app.races = [];
+        app.racesScores = data;
+    });
+}
+
 function loadDrivers() {
-    sendRequest("/Drivers", "get", data => {
+    sendRequest("/drivers", "get", data => {
         app.teams = [];
         app.countries = [];
         app.drivers = data;
         app.circuits = [];
         app.races = [];
+        app.racesScores = [];
     });
 }
 
 function loadTeams() {
-    sendRequest("/Teams", "get", data => {
+    sendRequest("/teams", "get", data => {
         app.teams = data;
         app.countries = [];
         app.drivers = [];
         app.circuits = [];
         app.races = [];
+        app.racesScores = [];
+        console.log(data);
     });
 }
 
 function loadCountries() {
-    sendRequest("/Countries", "get", data => {
+    sendRequest("/countries", "get", data => {
         app.teams = [];
         app.countries = data;
         app.drivers = [];
         app.circuits = [];
         app.races = [];
+        app.racesScores = [];
     });
 }
 
 function loadCircuits() {
-    sendRequest("/Circuits", "get", data => {
+    sendRequest("/circuits", "get", data => {
         app.teams = [];
         app.countries = [];
         app.drivers = [];
         app.circuits = data;
         app.races = [];
+        app.racesScores = [];
     });
 }
 
 function loadRaces() {
-    sendRequest("/Races", "get", data => {
+    sendRequest("/races", "get", data => {
         app.teams = [];
         app.countries = [];
         app.drivers = [];
         app.circuits = [];
         app.races = data;
+        app.racesScores = [];
     });
-    
+}
+
+function loadRacesScores() {
+    sendRequest("/racesScores", "get", data => {
+        app.teams = [];
+        app.countries = [];
+        app.drivers = [];
+        app.circuits = [];
+        app.races = [];
+        app.racesScores = data;
+        console.log(data);
+    });
 }
 
 function sendRequest(parameters, method, callback) {

@@ -8,18 +8,35 @@ using FormulaOneDll;
 
 namespace FormulaOneWebApi.Controllers
 {
+    [RoutePrefix("api")]
     public class DriversController : ApiController
     {
         DbTools db = new DbTools();
 
+        [Route("drivers")]
+        [HttpGet]
         public IEnumerable<Driver> GetAllDrivers()
         {
             return db.Drivers.Values;
         }
 
+        [Route("drivers/{id}")]
+        [HttpGet]
         public IHttpActionResult GetDriver(int id)
         {
-            return NotFound();
+            try
+            {
+                db.GetDrivers();
+                if (db.Drivers[id] == null)
+                    return NotFound();
+
+                return Ok(db.Drivers[id]);
+            }
+            catch (Exception)
+            {
+
+                return NotFound();
+            }
         }
     }
 }

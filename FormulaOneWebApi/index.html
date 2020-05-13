@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Formula One</title>
+    <title>Formula One - SP</title>
     <meta http-equiv="X-UA-Compatible" content="IE =edge">
     <meta name="viewport" content="width =device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -22,12 +22,103 @@
         </div>
         <div id="app" class="row">
             <div class="col-sm-12">
+                <!-- Navbar copiata direttamente dal sito F1.com-->
+                <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                    <a class="navbar-brand" href="index.html"><img class="img-responsive" width="200px" src="https://www.formula1.com/content/dam/fom-website/teams/2020/alfa-romeo-racing.png.transform/4col/image.png" /></a>
+                    <!-- Navbar Buttons -->
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="loadTeams()" href="#">Teams</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="loadCountries()" href="#">Countries</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="loadDrivers()" href="#">Drivers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="loadCircuits()" href="#">Circuits</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="loadRaces()" href="#">Races</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" onclick="loadRacesScores()" href="#">Races Scores</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- Versione con semplici button
                 <h2>Visualizza:</h2>
                 <input type="button" value="Teams" onclick="loadTeams();" class="btn btn-primary" />
                 <input type="button" value="Countries" onclick="loadCountries();" class="btn btn-success" />
                 <input type="button" value="Drivers" onclick="loadDrivers();" class="btn btn-warning" style="color:white" />
                 <input type="button" value="Circuits" onclick="loadCircuits();" class="btn btn-danger" style="color:white" />
                 <input type="button" value="Races" onclick="loadRaces();" class="btn btn-info" style="color:white" />
+                <input type="button" value="Races Scores" onclick="loadRacesScores();" class="btn btn-dark" style="color:white" />
+                -->
+
+                <table class="table">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <label>Search a Team with his unique code:</label>
+                                <br />
+                                <input type="text" class="form-control" id="txtTeam">
+                                <br />
+                                <input type="button" class="btn btn-dark" onclick="singleTeam()" value="Search Team" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>Search a Driver with his unique code:</label>
+                                <br />
+                                <input type="text" class="form-control" id="txtDriver">
+                                <br />
+                                <input type="button" class="btn btn-dark" onclick="singleDriver()"value="Search Driver" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>Search a Country with his unique code (example "IT"):</label>
+                                <br />
+                                <input type="text" class="form-control" id="txtCountry">
+                                <br />
+                                <input type="button" class="btn btn-dark" onclick="singleCountry()" value="Search Country" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>Search a Circuit with his unique code:</label>
+                                <br />
+                                <input type="text" class="form-control" id="txtCircuit">
+                                <br />
+                                <input type="button" class="btn btn-dark" onclick="singleCircuit()" value="Search Circuit" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>Search a Race with his unique code:</label>
+                                <br />
+                                <input type="text" class="form-control" id="txtRace">
+                                <br />
+                                <input type="button" class="btn btn-dark" onclick="singleRace()" value="Search Race" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <label>Search a Race Score with his unique code:</label>
+                                <br />
+                                <input type="text" class="form-control" id="txtRaceScore">
+                                <br />
+                                <input type="button" class="btn btn-dark" onclick="singleRaceScore()" value="Search Race Score" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
 
                 <table v-if="teams.length > 0" id="teamsTable" class="table">
                     <thead>
@@ -59,6 +150,7 @@
                         </tr>
                     </tbody>
                 </table>
+
                 <table class="table is-fullwidth is-hoverable table" v-if="drivers.length > 0" id="driversTable">
                     <thead>
                         <tr>
@@ -79,12 +171,13 @@
                             <td>{{item.Lastname}}</td>
                             <td>{{item.Number}}</td>
                             <td>{{new Date(item.Dob)}}</td>
-                            <td>{{item.PlaceOfBirth}}</td>
+                            <td>{{item.PlaceOfBirthday}}</td>
                             <td>{{item.Country.CountryName}}</td>
                             <td><img v-bind:src="item.Image" style="height:80px; width:80px;" /></td>
                         </tr>
                     </tbody>
                 </table>
+
                 <table class="table is-fullwidth is-hoverable table" v-if="countries.length > 0" id="countryTable">
                     <thead>
                         <tr>
@@ -101,6 +194,7 @@
                         </tr>
                     </tbody>
                 </table>
+
                 <table class="table is-fullwidth is-hoverable table" v-if="circuits.length > 0" id="circuitsTable">
                     <thead>
                         <tr>
@@ -145,6 +239,27 @@
                             <td>{{item.NLaps}}</td>
                             <td>{{item.GpDate}}</td>
                             <td>{{item.ExtCountry}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table is-fullwidth is-hoverable table" v-if="racesScores.length > 0" id="racesScoresTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Driver</th>
+                            <th>Score</th>
+                            <th>Race</th>
+                            <th>Personal Fastest Lap</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in racesScores">
+                            <td>{{item.Id}}</td>
+                            <td>{{item.Driver}}</td>
+                            <td>{{item.Score}}</td>
+                            <td>{{item.Race}}</td>
+                            <td>{{item.FastestLap}}</td>
                         </tr>
                     </tbody>
                 </table>

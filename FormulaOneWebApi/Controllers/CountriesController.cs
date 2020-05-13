@@ -8,18 +8,34 @@ using System.Web.Http;
 
 namespace FormulaOneWebApi.Controllers
 {
+    [RoutePrefix("api")]
     public class CountriesController : ApiController
     {
         DbTools db = new DbTools();
 
+        [Route("countries")]
+        [HttpGet]
         public IEnumerable<Country> GetAllCountries()
         {
             return db.Countries.Values;
         }
 
-        public IHttpActionResult GetCountry(int id)
+        [Route("countries/{id}")]
+        [HttpGet]
+        public IHttpActionResult GetCountry(string id)
         {
-            return NotFound();
+            try
+            {
+                db.GetCountries();
+                if (db.Countries[id] == null)
+                    return NotFound();
+
+                return Ok(db.Countries[id]);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
     }
 }

@@ -24,7 +24,9 @@ namespace FormulaOneDll
         private Dictionary<int, Driver> drivers;
         private Dictionary<string, Country> countries;
         private Dictionary<int, Circuits> circuits;
-        private Dictionary<int, Race> races;
+        public Dictionary<int, Race> races;
+        private Dictionary<int, RacesScores> racesScores;
+        private Dictionary<int, Scores> scores;
         private List<Team> teams;
 
         public Dictionary<int, Driver> Drivers
@@ -67,6 +69,29 @@ namespace FormulaOneDll
             }
             set => races = value;
         }
+
+        public Dictionary<int, RacesScores> RacesScores
+        {
+            get
+            {
+                if (this.racesScores == null)
+                    this.GetRacesScores();
+                return this.racesScores;
+            }
+            set => racesScores = value;
+        }
+
+        public Dictionary<int, Scores> Scores
+        {
+            get
+            {
+                if (this.scores == null)
+                    this.GetScores();
+                return this.scores;
+            }
+            set => scores = value;
+        }
+
         public List<Team> Teams
         {
             get
@@ -182,7 +207,8 @@ namespace FormulaOneDll
                         Country c = new Country()
                         {
                             CountryCode = countryIsoCode,
-                            CountryName = reader.GetString(1)
+                            CountryName = reader.GetString(1),
+                            Flag = reader.GetString(2)
                         };
                         this.countries.Add(countryIsoCode, c);
                     }
@@ -248,6 +274,64 @@ namespace FormulaOneDll
                             ExtCountry = Countries[reader.GetString(5)].CountryName 
                         };
                         this.races.Add(raceId, c);
+                    }
+                    con.Close();
+                    con.Dispose();
+                }
+                SqlConnection.ClearAllPools();
+            }
+        }
+
+        public void GetScores()
+        {
+            if (this.scores == null)
+            {
+                this.scores = new Dictionary<int, Scores>();
+                var con = new SqlConnection(CONNECTION_STRING);
+                using (con)
+                {
+                    con.Open();
+                    var command = new SqlCommand("SELECT * FROM Scores;", con);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int scoreId = reader.GetInt32(0);
+                        Scores s = new Scores(scoreId)
+                        {
+                            Score = reader.GetInt32(1),
+                            Detail = reader.GetString(2)
+                        };
+                        this.scores.Add(scoreId, s);
+                    }
+                    con.Close();
+                    con.Dispose();
+                }
+                SqlConnection.ClearAllPools();
+            }
+        }
+
+        public void GetRacesScores()
+        {
+            if (this.racesScores == null)
+            {
+                this.racesScores = new Dictionary<int, RacesScores>();
+                var con = new SqlConnection(CONNECTION_STRING);
+                using (con)
+                {
+                    con.Open();
+                    var command = new SqlCommand("SELECT * FROM Races_Scores;", con);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int raceScoreId = reader.GetInt32(0);
+                        RacesScores c = new RacesScores(raceScoreId)
+                        {
+                            Driver = Drivers[reader.GetInt32(1)].Firstname +" "+ Drivers[reader.GetInt32(1)].Lastname,
+                            Score = Scores[reader.GetInt32(2)].Score,
+                            Race = Races[reader.GetInt32(3)].Circuit,
+                            FastestLap = reader.GetString(4)
+                        };
+                        this.racesScores.Add(raceScoreId, c);
                     }
                     con.Close();
                     con.Dispose();
