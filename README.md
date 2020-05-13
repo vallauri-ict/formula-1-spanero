@@ -2,7 +2,7 @@
 
 ## Panero Simone
 
-(https://github.com/vallauri-ict/formula-1-spanero/blob/master/interface.png) <br>
+![interface](https://github.com/vallauri-ict/formula-1-spanero/blob/master/interface.png) <br>
 
 
 This project offers a web API and a CRUD to show F1 2020 Championship Data, it is based on a SQL server database.
