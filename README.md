@@ -21,7 +21,7 @@ Back-end written in C# (made with Visual Studio 2019), Front-end written in Html
 
 
 ## Get Started
-Ypu have just to adapt the path of your .mdf database location, you can find that line in the project FormulaOneDll/DbTools.cs 
+You have just to adapt the path of your .mdf database location, you can find that line in the project FormulaOneDll/DbTools.cs 
 
 
 ## Projects List
